@@ -766,3 +766,201 @@ else:
 finally:
     print('I always print')
 ```
+
+<h5 id='custom-error'>Custom Error Classes</h5>
+
+[Summary](#summary)
+
+```python
+# you need to inherit from ValueError class so you have all the methods that you need and also to be able to be raised
+class TooManyPagesReadError(ValueError):
+    pass
+
+class Book:
+    def __init__(self, name: str, page_count: int):
+        self.name = name
+        self.page_count = page_count
+        self.pages_read = 0
+    
+    def __repr__(self):
+        return (
+            f'<Book {self.name}, read{self.pages_read} pages out of {self.page_count}>'
+        )
+    
+    def read(self, pages: int):
+        if self.pages_read + pages > self.page_count:
+            raise TooManyPagesReadError(f'You tried to read {self.pages_read + pages} pages, but this book only has {self.page_count} pages.')
+        self.pages_read += pages
+        print(f'You have now read {self.pages_read} pages out of {self.page_count}.')
+
+python101 = Book('Python 101', 50)
+python101.read(35)
+python101.read(10)
+python101.read(30)
+```
+
+<h3 id='decorators'>Decorators</h3>
+
+[Summary](#summary)
+
+```python
+user = {'username': 'jose', 'access_level': 'guest'}
+
+# unprotected route
+def get_admin_password():
+    return '1234'
+
+# create decorator to protect the route
+def make_secure(func):
+    def secure_function():
+        if user['access_level'] == 'admin':
+            return func()
+        else:
+            return f'No admin permissions for {user['username']}'
+    return secure_function
+
+get_admin_password = make_secure(get_admin_password)
+print(get_admin_password())
+
+# With The '@' syntax
+def make_secure1(func):
+    def secure_function():
+        if user['access_level'] == 'admin':
+            return func()
+        else:
+            return f'No admin permissions for {user['username']}'
+    return secure_function
+
+# just add the '@' and the decorator function name to secure this route and then call it
+@make_secure1
+def get_admin_password1():
+    return '1234'
+
+print(get_admin_password1())
+
+# it will return the name as 'secure_function' and any documentation from get_admin_password1 would be lost and replaced with the secure_function
+print(get_admin_password1.__name__)
+
+# in order to fix this, we need to import functools and add the decorator before the secure_function
+import functools
+
+def make_secure2(func):         # decorator
+    @functools.wraps(func)          #it will protect the name and documentation of the 'func', in this case, the get_admin_password
+    def secure_function():          # function that will replace the other one
+        if user['access_level'] == 'admin':
+            return func()
+        else:
+            return f'No admin permissions for {user['username']}'
+    return secure_function
+
+@make_secure2
+def get_admin_password2():
+    return '1234'
+
+print(get_admin_password2.__name__)
+```
+
+```python
+# Decorators with Arguments => in order to pass arguments to the decorating function and still be able to use for several different functions, we should always add '*args, **kwargs' to the function that is the replacement:
+def make_secure3(func):   
+    @functools.wraps(func)          
+    def secure_function(*args, **kwargs):  
+        if user['access_level'] == 'admin':
+            return func(*args, **kwargs)
+        else:
+            return f'No admin permissions for {user['username']}'
+    return secure_function
+
+@make_secure3
+def get_admin_password3(panel):
+    if panel == 'admin':
+        return '1234'
+    elif panel == 'billing':
+        return 'super_secure_password'
+
+print(get_admin_password3('billing'))
+
+# Decorators with Parameters => in order to pass parameters to the decorator itself, you need to create another decorator for the decorator, in other words, another level.
+def factory(access_level):
+    def decorator(func):   
+        @functools.wraps(func)          
+        def secure_function(*args, **kwargs):  
+            if user['access_level'] == access_level:
+                return func(*args, **kwargs)
+            else:
+                return f'No {access_level} permissions for {user['username']}'
+        return secure_function
+    return decorator
+
+@factory('admin')
+def get_admin_password4():
+        return 'admin: 1244'
+
+@factory('user')
+def get_dashboard_password4():
+        return 'user: user_password'
+
+print(get_admin_password4())
+```
+
+<h3 id='mutability'>Mutability</h3>
+
+[Summary](#summary)
+
+Most things in python are mutable, except for:
+- Tuples
+- Strings
+- Integers
+- Booleans
+
+Every time you redefine the above you will be redefining, not changing the actual value. Ex.
+```python
+a = 50
+b = a
+
+print(id(a) == id(b))       # true
+
+a = 55
+
+print(id(a) == id(b))       # false
+print (a)                   # 55
+print (b)                   # 50
+```
+
+**Note**: never pass mutable default parameters because the class or function is analysed in the beginning and it will make the parameter to save the reference to the mutable object. Then, you will have a problem if you run it again, since the reference will still be the same. Ex.
+```python
+from typing import List
+
+class Student:
+                                            # this is BAD
+    def __init__(self, name: str, grades: List[int] = []):
+        self.name = name
+        self.grades = grades
+    
+    def take_exam(self, result: int):
+        self.grades.append(result)
+
+bob = Student('Bob')
+matt = Student('Matt')
+bob.take_exam(90)
+print(bob.grades)                   # [90]
+print(matt.grades)                  # [90]
+
+# to FIX it
+from typing import List, Optional
+
+class Student:
+                                            # this is BAD
+    def __init__(self, name: str, grades: Optional[List[int]] = None):
+        self.name = name
+        self.grades = grades or []
+    
+    def take_exam(self, result: int):
+        self.grades.append(result)
+
+bob = Student('Bob')
+matt = Student('Matt')
+bob.take_exam(90)
+print(bob.grades)                   # [90]
+print(matt.grades)                  # []
+```
