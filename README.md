@@ -1,52 +1,50 @@
-# Python-Flask-Udemy
+<h1>Python-Flask-Udemy</h1>
 
 Udemy courses on Python and Flask: [Basic](https://www.udemy.com/course/rest-api-flask-and-python/) and [Advance](https://www.udemy.com/course/advanced-rest-apis-flask-python/)
 
 <h3 id='summary'>Summary</h3>
 
 - [Python Refresher](#python-refresher)
-    - [Variables](#variables)
-        - [Numbers](#numbers)
-        - [Strings](#strings)
-        - [List, Tuples and Sets](#list-tuples-sets)
-        - [Booleans](#booleans)
-    - [User Input](#user-input)
-    - [The 'in' Keyword](#in-keyword)
-    - [Loops](#loops)
-    - [List Comprehension](#list-comprehension)
-    - [Dictionaries](#dictionaries)
-        - [Dictionaries Comprehension](#dictionaries-comprehension)
-    - [Destructuring Tuples](#destructuring-tuples)
-    - [Functions](#functions)
-        - [Lambda Functions](#lambda-functions)
-        - [Unpacking/Destructuring Arguments](#unpacking-arguments)
-        - [Unpacking/Destructuring Keyword Arguments](#unpacking-keyword-arguments)
-    - [Object Oriented Programming](#object-oriented)
-        - [Magic Methods: '\_\_str\_\_' and '\_\_repr\_\_'](#magic-methods)
-        - [@classmethod and @staticmethod](#oo-methods)
-        - [Class Inheritance](#class-inheritance)
-        - [Class Composition](#composition)
-    - [Type Hinting](#type-hinting)
-    - [Imports in Python](#imports)
-    - [Errors](#errors)
-    - []()
-    - []()
-    - []()
-    - []()
-    - []()
+  - [Variables](#variables)
+      - [Numbers](#numbers)
+      - [Strings](#strings)
+      - [Lists, Tuples and Sets](#lists-tuples-and-sets)
+      - [Booleans](#booleans)
+  - [User Input](#user-input)
+  - [The 'in' Keyword](#the-in-keyword)
+  - [Loops](#loops)
+  - [List Comprehension](#list-comprehension)
+  - [Dictionaries](#dictionaries)
+      - [Dictionaries Comprehension](#dictionaries-comprehension)
+  - [Destructuring Tuples](#destructuring-tuples)
+  - [Functions](#functions)
+      - [Lambda Functions](#lambda-functions)
+      - [Unpacking/Destructuring Arguments](#unpackingdestructuring-arguments)
+      - [Unpacking/Destructuring Keyword Arguments](#unpackingdestructuring-keyword-arguments)
+  - [Object Oriented Programming](#object-oriented-programming)
+      - [Magic Methods: '__str__' and '__repr__'](#magic-methods-str-and-repr)
+      - [@classmethod and @staticmethod](#classmethod-and-staticmethod)
+      - [Class Inheritance](#class-inheritance)
+      - [Class Composition](#class-composition)
+  - [Type Hinting](#type-hinting)
+  - [Imports in Python](#imports-in-python)
+  - [Errors](#errors)
+      - [Custom Error Classes](#custom-error-classes)
+  - [Decorators](#decorators)
+  - [Mutability](#mutability)
 
 
-<h2 id='python-refresher'>Python Refresher</h2>
+## Python Refresher
 
-<h3 id='variables'>Variables</h3>
+### Variables
 
-<h5 id='numbers'>Numbers</h5>
+##### Numbers
 
 [Summary](#summary)
 
 Python has integers (15) and floats (9.99).
 
-<h5 id='strings'>Strings</h5>
+##### Strings
 
 [Summary](#summary)
 
@@ -77,7 +75,7 @@ with_name = greeting.format(name)       # add name as the variable to be used
 print(with_name)
 ```
 
-<h5 id='lists-tuples-sets'>Lists, Tuples and Sets</h5>
+##### Lists, Tuples and Sets
 
 [Summary](#summary)
 
@@ -110,7 +108,7 @@ friends_study_science = {'Ellen', 'Renato', 'Bob', 'Rolf'}
 abroad_study_science = abroad.intersection(friends_study_science)
 ```
 
-<h5 id='booleans'>Booleans</h5>
+##### Booleans
 
 [Summary](#summary)
 
@@ -126,7 +124,7 @@ Some of the comparisons available:
 
 The `is` keyword checks if two elements are **the same**, so be careful with memory allocations. Even if two lists has the same items, it doesn't mean they are equal with the keyword is, since they are allocated in different places in memory.
 
-<h3 id='user-input'>User Input</h3>
+### User Input
 
 [Summary](#summary)
 
@@ -148,7 +146,7 @@ print(f'{square_feet} square feet is {square_meters:.2f} square meters.')
 # note: the `:.2f` will force the number to 2 decimals.
 ```
 
-<h3 id='in-keyword'>The 'in' Keyword</h3>
+### The 'in' Keyword
 
 [Summary](#summary)
 
@@ -163,7 +161,7 @@ else:
     print("Sorry, you're wrong")
 ```
 
-<h3 id='loops'>Loops</h3>
+### Loops
 
 [Summary](#summary)
 
@@ -184,7 +182,7 @@ print(total / amount)
 total = sum(grades)
 ```
 
-<h3 id='list-comprehension'>List Comprehension</h3>
+### List Comprehension
 
 [Summary](#summary)
 
@@ -216,7 +214,7 @@ friends_starts_s = [friend for friend in friends if friend.startswith('S')]
 friends_starts_s = [x for x in friends if x.startswith('S')]
 ```
 
-<h3 id='dictionaries'>Dictionaries</h3>
+### Dictionaries
 
 [Summary](#summary)
 
@@ -235,7 +233,7 @@ attendance_values = student_attendance.values()
 print(sum(attendance_values) / len(attendance_values))
 ```
 
-<h5 id='dictionaries-comprehension'>Dictionaries Comprehension</h5>
+##### Dictionaries Comprehension
 
 [Summary](#summary)
 
@@ -261,7 +259,7 @@ else:
     print('Your details are incorrect.')
 ```
 
-<h3 id='destructuring-tuples'>Destructuring Tuples</h3>
+### Destructuring Tuples
 
 [Summary](#summary)
 
@@ -294,7 +292,7 @@ print(head)                     # [2, 3, 4, 5]
 print(tail)                     # [1]
 ```
 
-<h3 id='functions'>Functions</h3>
+### Functions
 
 [Summary](#summary)
 
@@ -333,7 +331,7 @@ say_hello('Filly', surname='Phil')                               # Positional an
 say_hello('Phil')                               # Positional Argument + Default Parameter ==> Hello, Phil Doe.
 ```
 
-<h5 id='lambda-functions'>Lambda Functions</h5>
+##### Lambda Functions
 
 [Summary](#summary)
 
@@ -371,7 +369,7 @@ doubled_same = list(map(double, sequence))
 print(doubled_same)
 ```
 
-<h5 id='unpacking-arguments'>Unpacking/Destructuring Arguments</h5>
+##### Unpacking/Destructuring Arguments
 
 [Summary](#summary)
 
@@ -409,7 +407,7 @@ def apply(*args, operator):
 print(apply(1, 3, 6, 9, operator='*'))             # we need to use the keyword argument for operator, otherwise the `*args` from the function will get everything as the args and the operator will be missing.
 ```
 
-<h5 id='unpacking-keyword-arguments'>Unpacking/Destructuring Keyword Arguments</h5>
+##### Unpacking/Destructuring Keyword Arguments
 
 [Summary](#summary)
 
@@ -452,7 +450,7 @@ both(1, 3, 5, name='Bob', age=25)
 ```
 
 
-<h3 id='object-oriented'>Object Oriented Programming</h3>
+### Object Oriented Programming
 
 [Summary](#summary)
 
@@ -476,7 +474,7 @@ print(Student.average(student1))     #same as below
 print(student1.average())
 ```
 
-<h5 id='magic-methods'>Magic Methods: '__str__' and '__repr__'</h5>
+##### Magic Methods: '__str__' and '__repr__'
 
 [Summary](#summary)
 
@@ -509,7 +507,7 @@ print(bob_modified)                 # I am Bob, and I have 35 years.
 print(bob_modified.__repr__())          # <Person('Bob', 35)>
 ```
 
-<h5 id='oo-methods'>@classmethod and @staticmethod</h5>
+##### @classmethod and @staticmethod
 
 [Summary](#summary)
 
@@ -562,7 +560,7 @@ print(book)
 print(light)
 ```
 
-<h5 id='class-inheritance'>Class Inheritance</h5>
+##### Class Inheritance
 
 [Summary](#summary)
 
@@ -610,7 +608,7 @@ printer.disconnect()
 printer.print(30)
 ```
 
-<h5 id='composition'>Class Composition</h5>
+##### Class Composition
 
 [Summary](#summary)
 
@@ -666,7 +664,7 @@ print(shelf1)
 
 In sum, Inheritance means a book is a bookshelf, while Composition means that a bookshelf has many books.
 
-<h3 id='type-hinting'>Type Hinting</h3>
+### Type Hinting
 
 [Summary](#summary)
 
@@ -712,7 +710,7 @@ class Bookshelf:
         return f'Bookshelf with {len(self.books)} books.'
 ```
 
-<h3 id='imports'>Imports in Python</h3>
+### Imports in Python
 
 [Summary](#summary)
 
@@ -733,7 +731,7 @@ from topfolder.innerfolder import myfunction
 from topfolder.innerfolder import *
 ```
 
-<h3 id='errors'>Errors</h3>
+### Errors
 
 [Summary](#summary)
 
@@ -767,7 +765,7 @@ finally:
     print('I always print')
 ```
 
-<h5 id='custom-error'>Custom Error Classes</h5>
+##### Custom Error Classes
 
 [Summary](#summary)
 
@@ -799,7 +797,7 @@ python101.read(10)
 python101.read(30)
 ```
 
-<h3 id='decorators'>Decorators</h3>
+### Decorators
 
 [Summary](#summary)
 
@@ -903,7 +901,7 @@ def get_dashboard_password4():
 print(get_admin_password4())
 ```
 
-<h3 id='mutability'>Mutability</h3>
+### Mutability
 
 [Summary](#summary)
 
