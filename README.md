@@ -32,7 +32,7 @@ Udemy courses on Python and Flask: [Basic](https://www.udemy.com/course/rest-api
       - [Custom Error Classes](#custom-error-classes)
   - [Decorators](#decorators)
   - [Mutability](#mutability)
-  - [RESTful](#restful)
+  - [Transforming Folders into Modules](#transforming-folders-into-modules)
 
 
 ## Python Refresher
@@ -964,7 +964,10 @@ print(bob.grades)                   # [90]
 print(matt.grades)                  # []
 ```
 
-### RESTful
+### Transforming Folders into Modules
 
 [Summary](#summary)
 
+Inside the folder, create a file called: `__init__.py`
+
+Note: `Models` is our internal representation of the entity and `Resources` is our external representation of our entity.
