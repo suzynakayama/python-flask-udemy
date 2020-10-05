@@ -32,6 +32,7 @@ Udemy courses on Python and Flask: [Basic](https://www.udemy.com/course/rest-api
       - [Custom Error Classes](#custom-error-classes)
   - [Decorators](#decorators)
   - [Mutability](#mutability)
+  - [RESTful](#restful)
 
 
 ## Python Refresher
@@ -962,3 +963,8 @@ bob.take_exam(90)
 print(bob.grades)                   # [90]
 print(matt.grades)                  # []
 ```
+
+### RESTful
+
+[Summary](#summary)
+
