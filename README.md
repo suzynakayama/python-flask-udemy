@@ -33,6 +33,9 @@ Udemy courses on Python and Flask: [Basic](https://www.udemy.com/course/rest-api
   - [Decorators](#decorators)
   - [Mutability](#mutability)
   - [Transforming Folders into Modules](#transforming-folders-into-modules)
+  - [Deploying to Heroku](#deploying-to-heroku)
+      - [Add PostgreSQL to the App in Heroku](#add-postgresql-to-the-app-in-heroku)
+  - [Deploy Flask App to your Own Server (DigitalOcean)](#deploy-flask-app-to-your-own-server-digitalocean)
 
 
 ## Python Refresher
@@ -971,3 +974,76 @@ print(matt.grades)                  # []
 Inside the folder, create a file called: `__init__.py`
 
 Note: `Models` is our internal representation of the entity and `Resources` is our external representation of our entity.
+
+### Deploying to Heroku
+
+[Summary](#summary)
+
+1. Create `runtime.txt` in the root folder of your project and add the version of python `python-3.7.5`.
+2. Create `requirements.txt` in the root folder of your project and add the libraries you are using. Also add `uwsgi`.
+   ```
+    Flask
+    Flask-RESTful
+    Flask-JWT
+    Flask-SQLAlchemy
+    uwsgi
+   ```
+3. Create `uwsgi.ini` in the root folder of your project and add the configs:
+   ```
+    [uwsgi]
+    http-socket = :$(PORT)              // it will read the port from heroku
+    master = true                       // we will be using the master process
+    die-on-term = true                  // to liberate resources
+    module = app:app                    // module is app.py and the variable is app
+    memory-report = true
+   ```
+4. Create `Procfile` to declare the type of dyno and config:
+   ```
+    web: uwsgi uwsgi.ini                // type of dyno is web and we are going to run uwsgi with the config os uwsgi.ini
+   ```
+5. Separate the db from the app file creating the file `run.py` and cut from the app and paste the db there:
+    ```python
+    from app import app
+    from db import db
+
+    db.init_app(app)
+
+    @app.before_first_request
+    def create_tables():
+        db.create_all
+    ```
+6. Now, on the uwsgi change the module config:
+   ```
+    module= run:app                     // module is run.py and the variable is app
+   ```
+
+##### Add PostgreSQL to the App in Heroku
+
+[Summary](#summary)
+
+1. Add `Heroku Postgres` as an add-on.
+2. In config vars you will have the `DATABASE_URL` created automatically by Heroku Postgres.
+3. In you app.py, you will have to change the `DATABASE_URI` config to use the heroku variable if on heroku
+   ```python
+    import os
+
+        ...
+    
+    app.config['SQLALCHEMY_DATABASE_USI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+        ...
+   ```
+4. In the `requirements.txt` add the `psycopg2` library. It is a very popular library used to interact with postgres.
+
+### Deploy Flask App to your Own Server (DigitalOcean)
+
+[Summary](#summary)
+
+In `DigitalOcean` droplets are servers that you own. So, whenever we want to deploy a new server, you need to click `create droplet`.
+
+There, you will have to choose the image, usually `Ubuntu - 16.04`. Choose the size you want, you don't need block storage, and choose a datacenter region (choose the one closest to your users).
+
+Select your additional options, add your SSH keys (if you add you will always have to connect from that same computer), choose your hostname and tag and create.
+
+Click more and access console, add password you received by email.
+
+(...continue)
