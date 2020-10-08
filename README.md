@@ -36,6 +36,8 @@ Udemy courses on Python and Flask: [Basic](https://www.udemy.com/course/rest-api
   - [Deploying to Heroku](#deploying-to-heroku)
       - [Add PostgreSQL to the App in Heroku](#add-postgresql-to-the-app-in-heroku)
   - [Deploy Flask App to your Own Server (DigitalOcean)](#deploy-flask-app-to-your-own-server-digitalocean)
+  - [L10n (Localization) and i18n (Internationalization)](#l10n-localization-and-i18n-internationalization)
+  - [Flask-Babel](#flask-babel)
 
 
 ## Python Refresher
@@ -1047,3 +1049,43 @@ Select your additional options, add your SSH keys (if you add you will always ha
 Click more and access console, add password you received by email.
 
 (...continue)
+
+### L10n (Localization) and i18n (Internationalization)
+
+[Summary](#summary)
+
+The numbers come from the amount of characters that are between the L and the n and the i and the n.
+
+**Localization** means 'what would the product look like if you were native to this market?'
+    - You would have to adapt graphics
+    - modify content (translation, changing layout, images, colors)
+    - Convert to local units and currencies
+    - Use local format for dates, addresses, phones, etc.
+
+**Internationalization** is teh proces of planning and implementing a product so it can be localized.
+- Implementing a feature that lets us add new languages - the act of translating is not **internationalization**, adding the feature is.
+- Making sure your app support dates to be formatted in different ways to suit different markets
+- Having the capability to adhere to local legal regulations (e.g. GDPR)
+- Cookie legal regulations
+
+**Locale** are the localities. Ex. the 'English' language is not all the same everywhere. We have different locales:
+- British English: en-gb
+- American English: en-us
+
+Note: some markets can have multiple languages. Ex. Canada has en-ca (english) and fr-ca (french).
+
+**Translation** is the process of re-writing string form one locale into another. Normally done by professional translators or native speakers.
+
+In many software-only products (ex. libs), normally the usage of American English is enough
+
+In user-facing application, you'll normally want to make they feel more welcome translating the strings.
+
+**NOTE**: **Caching** means temporarily storing a piece of data that is being used multiple times, so it doesn't need to be regenerated or retrieved many times.
+
+### Flask-Babel
+
+[Summary](#summary)
+
+Library that helps with internationalization of an app. It supports date formatting with timezone and `gettext` translations.
+
+It can also look into your jinja template and check what else needs to be localized.
