@@ -2,7 +2,7 @@ import os
 from typing import List
 from requests import Response, post
 
-from libs.strings import gettext
+from libs.strings.strings import gettext
 
 
 class MailGunException(Exception):

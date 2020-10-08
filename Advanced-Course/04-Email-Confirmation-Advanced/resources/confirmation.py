@@ -8,7 +8,7 @@ from models.confirmation import ConfirmationModel
 from models.user import UserModel
 from schemas.confirmation import ConfirmationSchema
 from libs.mailgun import MailGunException
-from libs.strings import gettext
+from libs.strings.strings import gettext
 
 confirmation_schema = ConfirmationSchema()
 

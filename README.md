@@ -38,6 +38,8 @@ Udemy courses on Python and Flask: [Basic](https://www.udemy.com/course/rest-api
   - [Deploy Flask App to your Own Server (DigitalOcean)](#deploy-flask-app-to-your-own-server-digitalocean)
   - [L10n (Localization) and i18n (Internationalization)](#l10n-localization-and-i18n-internationalization)
   - [Flask-Babel](#flask-babel)
+  - [Werkzeug and wsgi](#werkzeug-and-wsgi)
+- [Flask Apps Contexts](#flask-apps-contexts)
 
 
 ## Python Refresher
@@ -1089,3 +1091,98 @@ In user-facing application, you'll normally want to make they feel more welcome 
 Library that helps with internationalization of an app. It supports date formatting with timezone and `gettext` translations.
 
 It can also look into your jinja template and check what else needs to be localized.
+
+### Werkzeug and wsgi
+
+[Summary](#summary)
+
+User makes request to your server (let's assume `nginx`)
+And `nginx` talks with your app's server
+When we run locally, we do app.run(), and that starts the Flask's built-in server (provided by Werkzeug).
+When we run on a production deployment, Flask's guilt-ind server is usually not fast enough, so normally we use `uWSGI` or `gunicorn`.
+So, `nginx` talks with `uWSGI` and `uWSGI` talks with the app.
+
+Flask's Built-in server uses `Werkzeug`. `Werkzeug` provides a `WSGI middleware` and a whole bunch of other functionality. The `WSGI middleware` is a development server (which is not the fastest).
+
+`WSGI` is not a program. Is a protocol which dictates how applications forward requests to other applications and receive responses.
+
+`uwsgi` is another protocol, but is faster, and `uWSGI` is a program that uses `uwsgi` protocol, and is also optimized for production.
+
+`WSGI` stands for Web Server Gateway Interface (PEP-333 and PEP-3333) and if you want to be compliant with it you need your application to have 2 parts:
+- gateway - receives data
+- application - uses data, including forwarding
+  
+
+Flask apps are WSGI apps, they have a gateway to receive data and then they use it (ex. in resources)
+
+Werkzeug's development server is alo a WSGI app. It receives data and forwards it to the Flask app.
+
+`WSGI Middleware` are WSGI applications that take data and forward it somewhere.
+
+Werkzeug is a WSGI utility library, and it provides a WSGI middleware. It is a python app that is a WSGI app, but it's not the end of the WSGI chain. Instead of using the data and returning a response, it forwards the data to the next layer. You can have many chained middlewares, like routing, load balancing, post-processing, caching, etc. Werkzeug does a lot of this for us, so often we don't need any more middlewares.
+
+## Flask Apps Contexts
+
+[Summary](#summary)
+
+There are mainly 3 contexts within a Flask app:
+1. Configuration Context - where we configure our app. Change everything here, because the app is not running. We are not supposed to change the app's configuration when we start running the app.
+2. App Context - app is ready, when we start running the app, we will enter the app context.
+3. Request Context - when we receive the first request, we enter the request context
+
+```python
+from flask import Flask
+
+app = Flask (__name__)
+
+# Configuration Context
+    ## Add Configurations
+app.config['FOO'] = 'bar' 
+app.config['DEBUG'] = True
+
+app.config['SQLALCHEMY_DB_URI'] = 'mysql:///...'        # libraries have the prefix
+
+    ## Register Routes
+@app.route('/')
+def function():
+    ...
+
+app.add_url_rule('/', function)         # another way to register routes
+
+    ## Init Libraries
+
+from flask_admin import Admin
+Admin.init_app(app)
+
+    ## Register Blueprints
+app.register_blueprints(...)
+
+    ## Add Hooks - to inject dependencies
+@app.before_request(...)
+@app.error_handler(...)
+
+    ## Call other Factories
+views.init_app(app)
+
+# App Context
+    ## Test the app
+app.test_client
+
+    ## Debug
+
+    ## Import global objects from Flask (request, session, g)
+        ### `request` brings all our requests
+        ### `session` brings all our sessions
+        ### `g` helps us to save state - AVOID using it! Don't use global on your program! But, if it really is necessary, please do it very well and controlled. It might create `data race` problems, for example.
+from flask import current_app, g
+
+    ## Some Hooks execution
+        ### for example the `before_request` one.
+
+# Request Context
+    ## Use global objects from Flask (request, session, g)
+from flask import request
+
+request.args
+request.form
+```
