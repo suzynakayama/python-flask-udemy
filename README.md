@@ -40,6 +40,7 @@ Udemy courses on Python and Flask: [Basic](https://www.udemy.com/course/rest-api
   - [Flask-Babel](#flask-babel)
   - [Werkzeug and wsgi](#werkzeug-and-wsgi)
   - [Database Migrations](#database-migrations)
+- [Pipenv](#pipenv)
 
 
 ## Python Refresher
@@ -1243,3 +1244,56 @@ from flask import request
 request.args
 request.form
 ```
+
+## Pipenv
+
+[Summary](#summary)
+
+Is a tool that automatically creates and manages a virtualenv as well as manages packages and versions.
+
+You don't need to use `pip` and `virtualenv` anymore, just use `pipenv`.
+
+1. Installation: `brew install pipenv` (only once, it will install it globabally)
+2. To initialize a Python 3 virtual environment, run `pipenv --three`.
+    To initialize a Python 2 virtual environment, run `pipenv --two`.
+3. To install/uninstall:
+    ```
+    pipenv install <package>
+    pipenv install --dev <package>
+
+    pipenv uninstall <package>
+    ```
+4. To run a terminal shell with the virtual environment `pipenv shell`. To leave the environment `exit`.
+5. Other Commands:
+   ```
+    `graph` will show you a dependency graph of your installed dependencies.
+
+    `run` will run a given command from the virtualenv, with any arguments forwarded (e.g. $ `pipenv run python` or $ `pipenv run pip freeze`).
+
+    `check` checks for security vulnerabilities and asserts that PEP 508 requirements are being met by the current environment.
+   ```
+
+The pipfile is like the npm package.json, where we keep the requirements/libraries for out application.
+
+The syntax of the file:
+
+```python
+[[source]] # Here goes your package sources (where you are downloading your packages from).
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages] # Here goes your package requirements for running the application and its versions (which packages you will use when running the application).
+requests = "*"
+flask = "*"
+pandas = "*"
+
+[dev-packages] # Here goes your package requirements for developing the application and its versions (which packaes you will use when developing the application)
+pylint = "*"
+wheel = "*"
+
+[requires] # Here goes your required Python version.
+python_version = "3.6"
+```
+
+The pipfile.lock is like npm package.lock.json, where we keep the versions used. It is automatically created, but you can also type on the terminal `pipenv lock`.
