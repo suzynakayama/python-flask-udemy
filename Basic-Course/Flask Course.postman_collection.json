@@ -1,0 +1,1393 @@
+{
+	"info": {
+		"_postman_id": "d6135bcc-c80a-4fef-983c-10ce381499eb",
+		"name": "Flask Course",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "03 - First API",
+			"item": [
+				{
+					"name": "Get Stores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/store",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Store",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/store/My First Store",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"store",
+								"My First Store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Specific Store Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/store/My First Store/item",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"store",
+								"My First Store",
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post New Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Another Store\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/store",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post New Item to Specific Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Another Item\",\n    \"price\": 10.99\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/store/Another Store/item",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"store",
+								"Another Store",
+								"item"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "04 - Flask_RESTful",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Bob\",\n    \"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/auth",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/items",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Item by Name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT  eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDE5MjMwNjQsImlhdCI6MTYwMTkyMjc2NCwibmJmIjoxNjAxOTIyNzY0LCJpZGVudGl0eSI6MX0.3DI4Kh83R-vR1tfjnBdYlBTmVWOUfsF2UIePLo5On3g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3005/items/pen",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Item by Name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 1.99\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/items/pen",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Item by Name",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 2.99\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/items/pencil",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"items",
+								"pencil"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the Item by Name",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/items/pen",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "05 - SQL Db",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Bob\",\n    \"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/auth",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/vnd.api+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Bob\",\n    \"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/users/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/items",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Item by Name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDE5MzA3ODEsImlhdCI6MTYwMTkzMDQ4MSwibmJmIjoxNjAxOTMwNDgxLCJpZGVudGl0eSI6MX0.fGNkLxuvwt8DMHvH5gUsOSqIRuwUXMDz2iEYR2XTtDU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:3005/items/pen",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Item by Name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 1.99\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/items/pen",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Item by Name",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 3.99\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3005/items/pen",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the Item by Name",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3005/items/pen",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3005",
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "06 - SQLAlchemy",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6847eaea-9b16-4fc2-bf46-1afc7a2cd4f6",
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"tests[\"Access Token is not empty\"] = jsonData.access_token !== undefined;",
+									"",
+									"postman.setEnvironmentVariable('jwt_token', jsonData.access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Bob\",\n    \"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/auth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/vnd.api+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Bob\",\n    \"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/users/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4ccd4ccd-e4c2-4af6-a16a-f9832b51c433",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Stores",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "20ac4b7f-4cdc-4f6b-96e3-471071b32c91",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/stores",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Item by Name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/items/pen",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Store by Name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/stores/First",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"First"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Item by Name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 1.99,\n    \"store_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{url}}/items/pen",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Store by Name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"First\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/stores/First",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"First"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Item by Name",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 2.99,\n    \"store_id\": 2\n}"
+						},
+						"url": {
+							"raw": "{{url}}/items/pen",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Store by Name",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 2.99\n}"
+						},
+						"url": {
+							"raw": "{{url}}/stores/pen",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the Item by Name",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/pen",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the Store by Name",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/stores/First",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"First"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "07 - Flask-JWT-Extended",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "284b3ac7-7c56-4e39-bf32-a01a08fd67ed",
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"tests[\"Access Token is not empty\"] = jsonData.access_token !== undefined;",
+									"",
+									"postman.setEnvironmentVariable('jwt_token', jsonData.access_token)",
+									"postman.setEnvironmentVariable('refresh_token', jsonData.refresh_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Bob\",\n    \"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/users/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5c706115-55a7-4e82-8166-836af684d7c7",
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"tests[\"Access Token is not empty\"] = jsonData.access_token !== undefined;",
+									"",
+									"postman.setEnvironmentVariable('jwt_token', jsonData.access_token)",
+									"postman.setEnvironmentVariable('refresh_token', jsonData.refresh_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/users/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Bob\",\n    \"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/users/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/vnd.api+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/users/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a25cffb5-6124-4161-b733-167d75bbccf0",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/items",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Stores",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8e8f4991-b01b-47da-adbb-13e2aabbdca3",
+								"exec": [
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/stores",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Item by Name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/items/pen",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Store by Name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/stores/First",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"First"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Item by Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1d22ac0c-5f3c-4ee7-955d-4ef40955c64a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 1.99,\n    \"store_id\": 1\n}"
+						},
+						"url": {
+							"raw": "{{url}}/items/rubber",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"rubber"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Store by Name",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"First\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/stores/First",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"First"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Item by Name",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 2.99,\n    \"store_id\": 2\n}"
+						},
+						"url": {
+							"raw": "{{url}}/items/pen",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Store by Name",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"price\": 2.99\n}"
+						},
+						"url": {
+							"raw": "{{url}}/stores/pen",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"pen"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the Item by Name",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/items/rubber",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"rubber"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the Store by Name",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/stores/First",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"stores",
+								"First"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b314225e-3154-47f0-83fa-23a01b1d3ab8",
+								"exec": [
+									"const jsonData = JSON.parse(responseBody);",
+									"pm.environment.set('access_token', jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{refresh_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/users/refresh",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
